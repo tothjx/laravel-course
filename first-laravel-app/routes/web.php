@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\VersionController;
 
 // home
 // termekek listazasa
 // http://127.0.0.1:8000/
 // http://127.0.0.1:8000/index
 // http://127.0.0.1:8000/home
-Route::group(['controller' => PageController::class], function () {      
+Route::group(['controller' => PageController::class], function () {
     Route::get('/', 'home');
     Route::get('/index', 'home');
     Route::get('/home', 'home');
@@ -17,6 +18,10 @@ Route::group(['controller' => PageController::class], function () {
 // Route::get('/', [PageController::class, 'home']);
 // Route::get('/index', [PageController::class, 'home']);
 // Route::get('/home', [PageController::class, 'home']);
+
+// alkalmazas-verziokat tartalmazo oldal elerese
+// http://127.0.0.1:8000/versions
+Route::get('/versions', [VersionController::class, 'versions']);
 
 // termekek listazasa
 // http://127.0.0.1:8000/products
