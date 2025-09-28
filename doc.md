@@ -20,4 +20,13 @@ php artisan serve > /dev/null 2>&1 &
 
 // szerver inditasa logolassal
 php artisan serve > server.log 2>&1 &
+
+// migracio
+php artisan migrate:refresh --seed
+
+php artisan db:seed --class=ProductSeeder
+php artisan db:seed --class=PostSeeder
+
+// regisztralt seeder-ek futtatasa
+php artisan db:seed
 </pre>
