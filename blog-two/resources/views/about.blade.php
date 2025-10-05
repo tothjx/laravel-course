@@ -1,47 +1,44 @@
 @extends('layouts.app')
 
-@section('title', 'Rólunk')
+@section('title', $title)
 
 @section('content')
-    <div class="uk-section">
+    <div class="uk-section uk-section-no-padding">
         <div class="uk-container">
-            <!-- Címsor -->
-            <div class="uk-text-center uk-margin-large-bottom">
-                <h1 class="uk-heading-primary">Rólunk</h1>
+            <div class="uk-text-center">
+                <h1 class="uk-heading-primary">{{ $title }}</h1>
             </div>
 
-            <!-- Tartalom -->
             <div class="uk-width-2-3@m uk-margin-auto">
                 <div class="uk-card uk-card-default uk-card-body">
                     <p class="uk-text-lead">
-                        Üdvözöljük a Blog Two oldalon! Mi egy lelkes csapat vagyunk, akik szenvedélyesen
-                        foglalkoznak a modern webfejlesztéssel és szeretjük megosztani tudásunkat a közösséggel.
+                        {{ $introduction }}
                     </p>
 
                     <p>
-                        Blogunk célja, hogy hasznos információkat, gyakorlati tippeket és érdekes cikkeket
-                        osszunk meg a webfejlesztés világából. Legyen szó Laravel keretrendszerről,
-                        modern CSS technikákról vagy PHP fejlesztésről - nálunk mindig találsz valamit.
+                        <img src="{{ $urlImage }}" alt="image">
+                    </p>
+
+                    <p style="text-align: justify;">
+                        {{ $description }}
                     </p>
 
                     <p>
-                        Hiszünk abban, hogy a tudás megosztása által mindannyian fejlődhetünk.
-                        Csatlakozz hozzánk, és fedezd fel a webfejlesztés izgalmas világát!
+                        {{ $mission }}
                     </p>
 
                     <div class="uk-margin-medium-top">
-                        <h3>Miért válassz minket?</h3>
+                        <h3>{{ $featuresTitle }}</h3>
                         <ul class="uk-list uk-list-bullet">
-                            <li>Aktuális és releváns tartalom</li>
-                            <li>Gyakorlati példák és kódminták</li>
-                            <li>Barátságos közösség</li>
-                            <li>Rendszeres frissítések</li>
+                            @foreach($features as $feature)
+                                <li>{{ $feature }}</li>
+                            @endforeach
                         </ul>
                     </div>
 
                     <div class="uk-text-center uk-margin-medium-top">
                         <a href="{{ route('blog') }}" class="uk-button uk-button-primary">
-                            Böngéssz a bejegyzések között
+                            continue to the blog
                         </a>
                     </div>
                 </div>

@@ -12,19 +12,13 @@ class Card extends Component
     public $image;
     public $date;
 
-    /**
-     * Create a new component instance.
-     */
     public function __construct($title, $image = null, $date)
     {
         $this->title = $title;
-        $this->image = $image ?? 'https://picsum.photos/400/250?random=default';
+        $this->image = $image ?? config('app.urlDefaultImage');
         $this->date = $date;
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.card');

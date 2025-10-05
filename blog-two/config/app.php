@@ -123,4 +123,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'urlDefaultImage' => env('URL_DEFAULT_IMAGE', 'https://picsum.photos/400/300?random='),
+
+    'urlAboutImage' => env('URL_ABOUT_IMAGE', 'https://picsum.photos/720/400?random=1'),
 ];

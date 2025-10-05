@@ -1,0 +1,16 @@
+.uk-logo {
+    font-weight: bold !important;
+    text-transform: uppercase;
+}
+
+.uk-section-no-padding {
+    padding: 0px;
+}
+
+.h1-normal {
+    padding: 20px;
+}
+
+footer {
+    padding: 32px 0;
+}
