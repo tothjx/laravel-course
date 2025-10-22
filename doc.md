@@ -30,3 +30,20 @@ php artisan db:seed --class=PostSeeder
 // regisztralt seeder-ek futtatasa
 php artisan db:seed
 </pre>
+
+# Breeze
+<pre>
+composer create-project "laravel/laravel:^12.0" breeze-app
+composer require laravel/breeze
+
+php artisan breeze:install
+
+Which Breeze stack would you like to install?
+- blade
+
+Would you like dark mode support?
+- yes
+
+Which testing framework do you prefer?
+PHPUnit
+</pre>

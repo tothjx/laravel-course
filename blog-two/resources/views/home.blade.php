@@ -11,7 +11,7 @@
 
             <div class="uk-width-2-3@m uk-margin-auto">
                 <p class="uk-text-lead uk-text-justify">
-                    {{ $content }}
+                    {!! $content !!}
                 </p>
             </div>
 
