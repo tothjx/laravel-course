@@ -1,0 +1,31 @@
+services:
+  webserver:
+    image: php:8.3.3-apache
+    container_name: apache-webserver
+    ports:
+      - 8082:80
+      - 4443:443
+    volumes:
+      - ./src:/var/www/html
+  database:
+    image: mysql:8.4.2-oracle
+    container_name: mysql-server
+    ports:
+      - 3366:3306
+    environment:
+      - MYSQL_DATABASE=tothj_database
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=php_docker_user
+      - MYSQL_PASSWORD=php_docker_password
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    ports:
+      - 8081:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=database
+      - PMA_USER=php_docker_user
+      - PMA_PASSWORD=php_docker_password

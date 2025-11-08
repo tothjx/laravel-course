@@ -1,0 +1,10 @@
+{
+    "name": "docker-node-0",
+    "version": "1.0.0",
+    "description": "node on docker",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "license": "MIT"
+}
