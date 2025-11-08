@@ -1,0 +1,10 @@
+docker build -t img-php-app .
+
+docker run -d --name cont-php-app -p 8080:80 img-php-app
+
+docker start cont-php-app
+docker stop cont-php-app
+docker rm cont-php-app
+docker ps
+
+http://localhost:8080
