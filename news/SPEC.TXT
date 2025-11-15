@@ -1,0 +1,36 @@
+Az alkalmazásban szerepelnie kell az alábbi laravel funkcióknak:
+
+Migration
+Seeder és Factory
+Cache
+Console
+Notification
+Queue Job
+Event
+Listener
+Task Scheduling
+Request
+
+A bootstrap 5.3.8 legyen a megjelenítés alapja, a file-ok legyenek elérhetőek a public könyvtárból (ne cdn legyen).
+Szerepeljenk benne felhasználók aki cikkeket írnak (legyen 1 bekezdéses lead a cikkekhez). Aki feliratkozott az értesítésre, kapjon értesítést minden cikkről (ez csak jelölve legyen a táblában). Legyen 2 admin felhasználó. Nem kell regisztrációs lehetőség, csak belépés user-password-el, és kilépés.
+
+Az oldalon mindig a legfrissebb cikk legyen legfelül, 10 cikk jelenjen meg, lapozós legyen az oldal. Cikkenként legyen megjelölve a szerző felhasználó, és a létrehozás dátuma óra-perc-másodperc pontossággal.
+
+Táblák:
+- user (felhasználó, ez lehet a beépített tábla, ha kell ki kell egészíteni)
+- article (cikk)
+- notification (értesítések)
+
+Legyen egy menüpont a cikkekhez, a felhasználók listájához, és egy link új cikk írásához, valamint a sajét cikk szerkesztéséhez. Az admin user szerkeszthesse más cikkeit is.
+
+Legyen egy percenként futó job NewArticleSaved néven, ami egy cikk létrehozását figyelve e-mail-ben értesítést küld annak aki feliratkozott az értesítésre. Ez mentődjön adatbázisba, szerepeljen benne az értesített e-mail-je és az új cikk címe.
+
+Az alkalmazás brand-je AnotherNews legyen.
+
+Egy órára cache-eljük el a cikkeket listázó query-t.
+
+A request ellenőrizze, hogy a cikk törzsének mérete ne legyen 5000 karakternél hosszabb, ez a táblában is legyen korlátozva.
+
+Legyen még egy ellenőrzés, ami egy tiltott szavak listájából ellenőrizze, hogy azok szerepelnek-e benne, pl. a 'fuck' szó ne kerülhessen a cikk tartalmába (csak a body-ban kell ellenőrizni).
+
+Legyen kezdetnek létrehozva 20 user és 20 cikk.
