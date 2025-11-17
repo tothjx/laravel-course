@@ -1,0 +1,170 @@
+WEBSHOP PROJEKT VÁLTOZÁSOK
+==========================
+
+Dátum: 2025-11-16
+Verzió: 1.0
+Laravel: 11
+
+## ÚJ FÁJLOK
+
+### Modellek
+- app/Models/Category.php - Kategória model (hasMany products)
+- app/Models/Product.php - Termék model (belongsTo category)
+- app/Models/Order.php - Rendelés model
+
+### Migrációk
+- database/migrations/2025_11_16_092222_create_categories_table.php - Kategóriák tábla
+- database/migrations/2025_11_16_092311_create_products_table.php - Termékek tábla
+- database/migrations/2025_11_16_092345_create_orders_table.php - Rendelések tábla
+- database/migrations/2025_11_16_092433_create_notifications_table.php - Értesítések tábla
+- database/migrations/2025_11_16_105536_seed_initial_data.php - Kezdeti adatok (admin, kategóriák, termékek)
+
+### Seederek
+- database/seeders/AdminSeeder.php - Admin felhasználó (admin@webshop.hu / password)
+- database/seeders/CategorySeeder.php - 5 kategória
+- database/seeders/ProductSeeder.php - 20 termék 5 kategóriában
+
+### Controllerek
+- app/Http/Controllers/ShopController.php - Webshop főoldal és kategóriák
+- app/Http/Controllers/CartController.php - Kosár kezelés (session alapú)
+- app/Http/Controllers/OrderController.php - Rendelés leadása
+
+### View-k
+- resources/views/layouts/app.blade.php - Főoldal layout (Bootstrap 5.3.3)
+- resources/views/shop/index.blade.php - Termékek listája kategóriák szerint
+- resources/views/cart/index.blade.php - Kosár oldal
+- resources/views/orders/checkout.blade.php - Rendelési űrlap
+- resources/views/orders/success.blade.php - Sikeres rendelés visszajelzés
+
+### Statikus fájlok
+- public/css/bootstrap.min.css - Bootstrap CSS (lokális)
+- public/js/bootstrap.bundle.min.js - Bootstrap JS (lokális)
+- public/images/products/product-1.jpg ... product-20.jpg - Termékképek
+
+## MÓDOSÍTOTT FÁJLOK
+
+### routes/web.php
+Új route-ok:
+- GET / -> ShopController@index (shop.index)
+- GET /category/{slug} -> ShopController@category (shop.category)
+- GET /cart -> CartController@index (cart.index)
+- POST /cart/add/{id} -> CartController@add (cart.add)
+- POST /cart/update/{id} -> CartController@update (cart.update)
+- DELETE /cart/remove/{id} -> CartController@remove (cart.remove)
+- GET /checkout -> OrderController@checkout (order.checkout)
+- POST /order -> OrderController@store (order.store)
+- GET /order/success/{id} -> OrderController@success (order.success)
+
+### database/seeders/DatabaseSeeder.php
+Hozzáadott seederek:
+- AdminSeeder::class
+- CategorySeeder::class
+- ProductSeeder::class
+
+### .env (konfiguráció)
+- SESSION_DRIVER=database (session alapú kosár)
+- DB_CONNECTION=sqlite (adatbázis)
+
+## FONTOSABB FUNKCIÓK
+
+### 1. Adatbázis szerkezet
+- users: admin felhasználó (email_verified_at kitöltve)
+- categories: 5 kategória (Alaplap, Memória, Processzor, Processzor-hűtő, Videokártya)
+- products: 20 termék képekkel, kategóriákkal, készlettel
+- orders: rendelések (vendég checkout) JSON items mezővel
+- notifications: értesítések (jelenleg nincs implementálva)
+
+### 2. Webshop funkcionalitás
+- Termékek böngészése kategóriák szerint
+- Kosárba helyezés (készlet azonnali csökkentéssel)
+- Kosár módosítás (mennyiség növelés/csökkentés)
+- Kosárból eltávolítás (készlet visszaállítással)
+- Session alapú kosár (vendég vásárlóknak)
+
+### 3. Rendelés leadása
+- Vásárló adatok (név, email, telefon)
+- Számlázási cím
+- Szállítási cím (másolás számlázási címről checkbox-szal)
+- Szállítási mód: házhoz szállítás / boltban átvétel
+- Fizetési mód: készpénz / bankkártya
+- Validáció minden mezőre
+- Rendelés mentése JSON items-szel
+- Kosár ürítése sikeres rendelés után
+- Sikeres rendelés visszajelzés oldal
+
+### 4. Készletkezelés
+- Kosárba helyezéskor készlet csökken (stock -1)
+- Kosárból eltávolításkor készlet nő (stock +1)
+- Kosárban mennyiség változtatáskor készlet követi
+- Rendeléskor készlet NEM változik (már korábban csökkent)
+- Session lejáratakor a kosárban lévő készlet elvész (félmegoldás, de elfogadható)
+
+### 5. Bootstrap integráció
+- Bootstrap 5.3.3 lokálisan (nem CDN)
+- npm install bootstrap után public/css és public/js mappába másolva
+- Reszponzív design
+- Card komponensek
+- Form validáció
+- Alert üzenetek (success/error)
+
+## ADATOK
+
+### Admin felhasználó
+Email: admin@webshop.hu
+Jelszó: password
+
+### Kategóriák (5 db)
+1. Alaplap (slug: alaplap)
+2. Memória (slug: memoria)
+3. Processzor (slug: processzor)
+4. Processzor-hűtő (slug: processzor-huto)
+5. Videokártya (slug: videokartya)
+
+### Termékek (20 db)
+- Minden terméknek van képe (public/images/products/product-{id}.jpg)
+- Minden terméknek van ára, készlete, leírása
+- Termékek created_at mezője egyedi timestamp (képekkel szinkronban)
+
+## TELEPÍTÉSI LÉPÉSEK ÚJ GÉPEN
+
+### Ha NEM viszed a database.sqlite fájlt:
+1. composer install
+2. npm install
+3. cp .env.example .env
+4. php artisan key:generate
+5. php artisan migrate:fresh (a seed_initial_data migráció automatikusan fut)
+6. npm run build (ha kell)
+7. A termékképeket (public/images/products/*.jpg) át kell másolni!
+8. php artisan serve
+
+### Ha viszed a database.sqlite fájlt:
+1. composer install
+2. npm install
+3. cp .env.example .env (vagy az eredeti .env fájlt)
+4. php artisan key:generate
+5. Semmi más migráció nem kell!
+6. A termékképeket (public/images/products/*.jpg) át kell másolni!
+7. php artisan serve
+
+## MEGJEGYZÉSEK
+
+- A készletkezelés a kosárba helyezéskor történik (nem a rendeléskor)
+- Ez biztosítja, hogy ne lehessen túlrendelni
+- Ha valaki nem rendel meg, a session lejártakor kerül vissza a készlet
+- A migration fájl hardcoded timestamp-okat tartalmaz (képekkel szinkronban)
+- Nincs admin felület implementálva (4. pont a spec.txt-ben)
+- Nincs értesítési rendszer implementálva (5. pont a spec.txt-ben)
+
+## KÖVETKEZŐ LÉPÉSEK (spec.txt szerint)
+
+4. Admin felület
+   - Bejelentkezés
+   - Rendelések listázása
+   - Rendelés részletek
+   - Rendelés státusz módosítása
+   - Értesítés küldése
+
+5. Értesítési rendszer
+   - Email értesítések
+   - Notification model használata
+   - Státusz változás követése

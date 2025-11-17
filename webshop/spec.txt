@@ -1,0 +1,77 @@
+Webshop specifikáció
+
+Működő webshop létrehozása fizetési kapu használata nélkül.
+Config és environment megfelelő beállítására különös figyelmet kell szentelni!
+
+1. Adatbázis
+
+1.1 Táblák létrehozása
+- felhasználók (meglévő user tábla, csak az admin kerül bele)
+- termék
+- termékkategória
+    - alaplap
+    - memória
+    - processzor
+    - processzor-hűtő
+    - videokártya
+- rendelés
+- értesítés
++ ha valami kimaradt azt pótoljuk
+
+1.2 Seeder-ek létrehozása
+- 1 admin seeder legyen az admin felület teszteléséhez
+- termékkategória seeder - 5 kategória legyen és mindegyikhez legalább 3 termék legyen kapcsolva
+- termék seeder - 20 termék legyen az adatbázisban
+
+2. WEB-alkalmazás
+
+A bootstrap 5.3.8 legyen a megjelenítés alapja, a file-ok legyenek elérhetőek a public könyvtárból (ne cdn legyen).
+Az ikonok css-e is kerüljön be a public-ba, ahol lehet használjuk is:
+https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css
+
+2.1 Top-menü
+- Logó
+- Nyitólap
+- Belépés admin felületre
+- Kosár szimbólum megjelenítése a benne található termékek számával
+
+2.2 Bal oldali menü
+- Termék kategóriák felsorolása, ami szűrőként funkcionál
+- Ha valaki rákattint az adott kategóriára, az betöltődik
+
+2.3 Nyitólap - összes termék listája
+- Minden kategória összes termékét listázza, amelyből van készleten
+- Legutóbb felvitt termék felülre kerül
+
+2.4 Termékek kategóriánként
+- A választott kategória összes termékét listázza, amelyből van készleten
+- Legutóbb felvitt termék felülre kerül
+
+2.5 Kosár (cart)
+- Termék kosárba helyezése, egyúttal a raktárkészlet csökkentése
+- Termékek számának növelése, csökkentése
+- Termékek törlése
+- Rendelésre továbblépés, ha van termék a kosárban
+
+2.6 Rendelés (checkout)
+- Rendelés rögzítése és kosár ürítése
+- Csak vendégként lehet rendelni
+- Számlázási adatok bekérése
+- Szállítási adatok bekérése
+- Szállítási mód kiválasztása
+    - házhoz szállítás
+    - boltban átvétel
+- Fizetési mód kiválasztása
+    - készpénz
+    - bankkártya
+- Rendelés jóváhagyása - összegzés megjelenjtése
+- email küldése a vásárlónak a rendelésről
+- értesítés (notification) küldése az adminnak a vásárlásról
+
+3. Admin oldal (az authentikált admin részére)
+- Belépés
+- Kilépés
+- Profil módosítása
+- Jelszó módosítása
+- Értesítések megjelenítése (AJAX)
+- Rendelések listázása - összes rendelés listázása, a legutóbbi rendelés van felül
