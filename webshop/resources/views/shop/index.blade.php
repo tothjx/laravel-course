@@ -34,6 +34,9 @@
                 @foreach($products as $product)
                     <div class="col">
                         <div class="card h-100">
+                            <div class="card-header" style="background-color: #f8f8f8;">
+                                <h5 class="card-title mb-0">{{ $product->category->name }}</h5>
+                            </div>
                             @if($product->image)
                                 <div class="product-image-container">
                                     <img src="{{ asset($product->image) }}" class="card-img-top product-image" alt="{{ $product->name }}">

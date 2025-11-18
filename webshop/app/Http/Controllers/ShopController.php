@@ -11,7 +11,8 @@ class ShopController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::where('stock', '>', 0)
+        $products = Product::with('category')
+            ->where('stock', '>', 0)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -22,7 +23,8 @@ class ShopController extends Controller
     {
         $categories = Category::all();
         $category = Category::where('slug', $slug)->firstOrFail();
-        $products = Product::where('category_id', $category->id)
+        $products = Product::with('category')
+            ->where('category_id', $category->id)
             ->where('stock', '>', 0)
             ->orderBy('created_at', 'desc')
             ->get();
