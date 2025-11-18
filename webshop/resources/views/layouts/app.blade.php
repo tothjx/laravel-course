@@ -25,7 +25,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Belépés admin felületre</a>
+                        <a class="nav-link" href="{{ route('admin.login') }}" target="_blank">Belépés admin felületre</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link position-relative" href="{{ route('cart.index') }}">

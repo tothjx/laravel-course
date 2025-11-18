@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
+use App\Notifications\OrderPlaced;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -63,9 +65,15 @@ class OrderController extends Controller
             'shipping_method' => $validated['shipping_method'],
             'payment_method' => $validated['payment_method'],
             'total_amount' => $total,
-            'items' => json_encode($cart),
+            'items' => $cart,
             'status' => 'pending',
         ]);
+
+        // Send notification to all admin users
+        $admins = User::all();
+        foreach ($admins as $admin) {
+            $admin->notify(new OrderPlaced($order));
+        }
 
         session()->forget('cart');
 

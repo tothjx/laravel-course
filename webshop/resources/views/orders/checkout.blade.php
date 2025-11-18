@@ -116,7 +116,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="shipping_method"
                                            id="shipping_home" value="házhoz szállítás"
-                                           {{ old('shipping_method') == 'házhoz szállítás' ? 'checked' : '' }} required>
+                                           {{ old('shipping_method', 'házhoz szállítás') == 'házhoz szállítás' ? 'checked' : '' }} required>
                                     <label class="form-check-label" for="shipping_home">
                                         Házhoz szállítás
                                     </label>
@@ -124,7 +124,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="shipping_method"
                                            id="shipping_store" value="boltban átvétel"
-                                           {{ old('shipping_method') == 'boltban átvétel' ? 'checked' : '' }}>
+                                           {{ old('shipping_method', 'házhoz szállítás') == 'boltban átvétel' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="shipping_store">
                                         Boltban átvétel
                                     </label>
@@ -139,7 +139,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method"
                                            id="payment_cash" value="készpénz"
-                                           {{ old('payment_method') == 'készpénz' ? 'checked' : '' }} required>
+                                           {{ old('payment_method', 'készpénz') == 'készpénz' ? 'checked' : '' }} required>
                                     <label class="form-check-label" for="payment_cash">
                                         Készpénz
                                     </label>
@@ -147,7 +147,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="payment_method"
                                            id="payment_card" value="bankkártya"
-                                           {{ old('payment_method') == 'bankkártya' ? 'checked' : '' }}>
+                                           {{ old('payment_method', 'készpénz') == 'bankkártya' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="payment_card">
                                         Bankkártya
                                     </label>
