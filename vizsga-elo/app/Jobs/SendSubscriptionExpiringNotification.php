@@ -12,7 +12,7 @@ class SendSubscriptionExpiringNotification implements ShouldQueue
     use Queueable;
 
     /**
-     * Create a new job instance.
+     * uj job letrehozasa
      */
     public function __construct(
         public User $user
@@ -21,7 +21,7 @@ class SendSubscriptionExpiringNotification implements ShouldQueue
     }
 
     /**
-     * Execute the job.
+     * job vegrehajtasa
      */
     public function handle(): void
     {

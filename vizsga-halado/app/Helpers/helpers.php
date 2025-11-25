@@ -4,7 +4,8 @@ use Carbon\Carbon;
 
 if (!function_exists('tenDaysFromNow')) {
     /**
-     * Visszaadja a dátumot ami 10 nap múlva lesz
+     * visszadja a mai naphoz kepest
+     * 10 nappal kesobbi datumot
      *
      * @return Carbon
      */
