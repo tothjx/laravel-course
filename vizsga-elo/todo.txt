@@ -1,0 +1,15 @@
+A feladat egy feliratkozásokat kezelő rendszer összeállítása Laravelben.
+
+- Clean code elvek használata fontos (Form request, Service, Repository, Dependency injection szerepeljen benne)
+- Helyes .env beállításokra figyelj!
+
+1. Migráció létrehozása a feliratkozások kezeléséhez. Nem szükséges új táblát hozzáadni csak a felhasználók táblához két új oszlop „subscription_at” dátum típusú oszlop kerüljön be (ezzel ellenőrizzük, hogy valakinek nem járt e le még a feliratkozása) és „subscription_notifiy” (ezzel ellenőrizzük, hogy volt e az illető értesítve)
+
+2. Seeder beállítása, hogy az admin és a példa felhasználók automatikusan hozzá legyenek adva az adatbázishoz. Legalább 20 teszt felhasználó kerüljön be
+
+3. 
+- Rendszeresen ellenőrizze a rendszer, hogy valakinek le fog e járni a feliratkozása a következő 10 napban. (Laravel Task Scheduling, Laravel Console)
+- Az adatbázis lekérdezéseket gyorsítótárazzuk a gyorsabb futtatás érdekében. (Laravel Cache)
+- Készíts egy helpert ami vissza adja azt a dátumot ami 10 nap múlva lesz. (Laravel Helper)
+- Ha valakinek le fog járni az előfizetése akkor jegyezzen be egy Queue Jobot ami küld egy értesítést a felhasználónak (Laravel Queues, Laravel Notification).
+- Ha már egyszer valakinek ki lett küldve értesítés azt jegyezze a felhasználó táblában „subscription_notifiy”.
